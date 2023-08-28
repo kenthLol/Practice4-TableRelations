@@ -1,7 +1,17 @@
+using P4TableRelations.Models;
+using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<SocialMediaContext>(options =>
+    options.UseMySql(builder.Configuration.GetConnectionString("SocialMediaContext"),
+    new MariaDbServerVersion(new Version(10, 4, 27)))
+    .EnableDetailedErrors()
+);
 
 var app = builder.Build();
 
