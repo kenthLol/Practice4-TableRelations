@@ -1,0 +1,47 @@
+@model P4TableRelations.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="text-center">
+    <h1>Volver</h1>
+    <p>
+        <a class="add-button" asp-action="Index"><i class="fa fa-arrow-left"></i></a>
+    </p>
+</div>
+
+<div class="container px-4 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="card">
+            <div class="row px-3">
+                <div class="profile-pic-container">
+                    <img class="profile-pic" src="@Model.PhotoUser">
+                </div>
+                <div class="flex-column ml-3">
+                    <h3 class="mb-0 font-weight-normal">@Html.DisplayFor(Model => Model.UserName)</h3>
+                </div>
+            </div>
+            <div class="row px-3">
+                <div class="post-image-container">
+                    <img class="post-image" src="@Model.ImagePost">
+                </div>
+            </div>
+            <div class="row px-3">
+                <p class="post-date">@Html.DisplayFor(Model => Model.Published)</p>
+            </div>
+            <div class="row px-3 mb-3"> <!-- Added margin-bottom -->
+                <div class="col">
+                    <a class="btn btn-primary ml-auto" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+                </div>
+            </div>
+            <div class="row px-3">
+                <h4>Comentarios</h4>
+                <p class="text-muted ml-3 mb-3">
+                    @Model.Comments.Count comentarios
+                </p> <!-- Added comment section title -->
+            </div>
+            @await Html.PartialAsync("ListComments")
+        </div>
+    </div>
+</div>
